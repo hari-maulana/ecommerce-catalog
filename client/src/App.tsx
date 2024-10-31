@@ -1,7 +1,10 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "./routes/Router";
+
 function App() {
   return (
     <>
-      <p>Hello, World!</p>
+      <RouterProvider router={createBrowserRouter(routes)} />
     </>
   );
 }
