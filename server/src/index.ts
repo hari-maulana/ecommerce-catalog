@@ -4,9 +4,11 @@ import swaggerUi from "swagger-ui-express";
 import { specs } from "./config/swagger";
 import productRoutes from "./routes/productRoutes";
 import cartRoutes from "./routes/cartRoutes";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
@@ -19,22 +21,8 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
 
-// Basic error handling middleware
-app.use(
-  (
-    err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    console.error(err.stack);
-    res.status(500).json({ error: "Something went wrong!" });
-  }
-);
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-  console.log(
-    `API Documentation available at http://localhost:${port}/api-docs`
-  );
+app.listen(Number(port), "0.0.0.0", () => {
+  // Added host parameter
+  console.log(`Server running at http://0.0.0.0:${port}`);
+  console.log(`API Documentation available at http://0.0.0.0:${port}/api-docs`);
 });
