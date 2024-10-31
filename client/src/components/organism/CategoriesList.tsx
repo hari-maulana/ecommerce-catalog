@@ -1,35 +1,61 @@
 import { ListGroup } from "react-bootstrap";
 
-export const CategoriesList = () => {
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  description: string;
+  category: string;
+}
+
+interface Props {
+  category: string;
+  setCategory: (value: string) => void;
+  products: Product[];
+}
+
+export const CategoriesList: React.FC<Props> = ({
+  category,
+  products,
+  setCategory,
+}) => {
+  const categories = [
+    "All Categories",
+    ...new Set(products.map((p) => p.category)),
+  ];
+
   return (
-    <div className="mt-3">
+    <div className="mt-3 ">
       <p
-        className="text-center"
+        className=" text-center"
         style={{ fontSize: "20px", fontWeight: "400" }}
       >
         Category
       </p>
-      <ListGroup defaultActiveKey="#link1">
-        <ListGroup.Item action href="#link1">
-          Footwear
-        </ListGroup.Item>
-        <ListGroup.Item action href="#link2">
-          Outer
-        </ListGroup.Item>
-        <ListGroup.Item action href="#link3">
-          Shirt
-        </ListGroup.Item>
-        <ListGroup.Item action href="#link4">
-          Pants & Shorts
-        </ListGroup.Item>
-        <ListGroup.Item action href="#link5">
-          Bag
-        </ListGroup.Item>
-        <ListGroup.Item action href="#link6">
-          Accessories
-        </ListGroup.Item>
-        <ListGroup.Item>This one is a button</ListGroup.Item>
+      <ListGroup>
+        {categories.map((cat, index) => (
+          <ListGroup.Item
+            key={index}
+            action
+            active={category === cat}
+            onClick={() => setCategory(cat === "All Categories" ? "" : cat)}
+          >
+            {cat}
+          </ListGroup.Item>
+        ))}
       </ListGroup>
     </div>
   );
 };
+
+{
+  /* <select value={category} onChange={(e) => setCategory(e.target.value)}>
+  <option value="">All Categories</option>
+  {[...new Set(products.map((p) => p.category))].map((cat) => (
+    <option key={cat} value={cat}>
+      {cat}
+    </option>
+  ))}
+</select> */
+}
