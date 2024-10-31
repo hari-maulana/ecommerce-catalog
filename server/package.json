@@ -12,12 +12,15 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.8.2",
     "@types/sqlite3": "^3.1.11",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "nodemon": "^3.1.7",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "types": "^0.1.1"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
